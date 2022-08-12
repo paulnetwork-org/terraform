@@ -9,5 +9,13 @@ terraform {
 
 provider "azurerm" {
   features {}
-  # Configuration options
 }
+
+module "kubernetes_deployment" {
+  source = "./modules/website/"
+}
+
+#module "mysql" {
+#  source = "./modules/mysql/"
+#}
+
