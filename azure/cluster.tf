@@ -12,7 +12,7 @@ resource "azurerm_kubernetes_cluster" "laroa" {
   default_node_pool {
     name           = "nodes"
     node_count     = 2
-    vm_size        = "Standard_D2_v2"
+    vm_size        = "Standard_D2_v3"
     
   }
 
