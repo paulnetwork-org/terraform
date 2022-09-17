@@ -4,16 +4,16 @@ worker-count = "3"
 
 # VM Configuration
 vm-prefix = "k8s"
-vm-template-name = "ubunt-packer"
+vm-template-name = "ubuntu-packer"
 vm-cpu = "2"
 vm-ram = "4096"
 vm-guest-id = "ubuntu64"
 vm-datastore = "NVME"
-vm-network = "VLAN128"
-vm-domain = "virtjo.local"
+vm-network = "VLAN10"
+vm-domain = "vsphere.local"
 
 # vSphere configuration
-vsphere-vcenter = "vcsa.virtjo.local"
+vsphere-vcenter = "vcenter.vsphere.local"
 vsphere-unverified-ssl = "true"
 vsphere-datacenter = "SDDC"
 vsphere-cluster = "cluster01"
