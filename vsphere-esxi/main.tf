@@ -72,12 +72,12 @@ resource "vsphere_virtual_machine" "control" {
             }
             
             network_interface {
-            ipv4_address = "10.128.128.11${count.index + 1}"
+            ipv4_address = "10.10.10.10${count.index + 1}"
             ipv4_netmask = 24
             }
 
-            ipv4_gateway = "10.128.128.1"
-            dns_server_list = [ "10.128.128.80" ]
+            ipv4_gateway = "10.110.10.1"
+            dns_server_list = [ "10.10.10.2" ]
 
         }
     }
@@ -115,12 +115,12 @@ resource "vsphere_virtual_machine" "worker" {
             }
             
             network_interface {
-            ipv4_address = "10.128.128.12${count.index + 1}"
+            ipv4_address = "10.10.10.11${count.index + 1}"
             ipv4_netmask = 24
             }
 
-            ipv4_gateway = "10.128.128.1"
-            dns_server_list = [ "10.128.128.80" ]
+            ipv4_gateway = "10.10.10.1"
+            dns_server_list = [ "10.10.10.2" ]
         }
     }
 }
