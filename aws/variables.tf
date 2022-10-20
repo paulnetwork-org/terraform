@@ -22,7 +22,3 @@ variable "aws_secret_key" {
   type = string
 }
 
-#variable "access_ip" {
-#  type = string
-#}
-
