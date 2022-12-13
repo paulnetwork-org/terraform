@@ -1,11 +1,10 @@
-
 provider "kubernetes" {
   config_path = "~/.kube/config"
 }
 
 resource "kubernetes_deployment" "deployment" {
   metadata {
-    name = "laroa-deployment"
+    name = "paul-deployment"
     labels = {
       app = "website"
     }
@@ -29,7 +28,7 @@ resource "kubernetes_deployment" "deployment" {
 
       spec {
         container {
-          image = "pauldualsim/laroa:nginx"
+          image = "pauldualsim/paulnetwork.org:latest"
           name  = "nginx"
           port {
             name = "http"
@@ -47,7 +46,7 @@ resource "kubernetes_deployment" "deployment" {
 
 resource "kubernetes_service" "service" {
   metadata {
-    name = "laroa-service"
+    name = "paul-service"
   }
 
   spec {
@@ -68,4 +67,3 @@ resource "kubernetes_service" "service" {
     type = "LoadBalancer"
   }
 }
-
