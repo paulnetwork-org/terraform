@@ -1,7 +1,3 @@
-provider "kubernetes" {
-  config_path = "~/.kube/config"
-}
-
 resource "kubernetes_deployment" "deployment" {
   metadata {
     name = "paul-deployment"
