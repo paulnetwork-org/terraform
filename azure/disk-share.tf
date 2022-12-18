@@ -133,7 +133,7 @@ resource "kubernetes_deployment" "website" {
     name = "website-deployment"
   }
   spec {
-    replicas = 2
+    replicas = 1
     selector {
       match_labels = {
         app = "website"
