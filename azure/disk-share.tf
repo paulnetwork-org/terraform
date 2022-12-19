@@ -66,23 +66,6 @@ resource "azurerm_managed_disk" "azuredisk1" {
 }
 
 
-#resource "azurerm_storage_account" "azure_storage1" {
-#  name                     = "storagetestabc123"
-#  resource_group_name      = azurerm_resource_group.paul.name
-#  location                 = azurerm_resource_group.paul.location
-#  account_tier             = "Standard"
-#  account_replication_type = "LRS"
-#  enable_https_traffic_only = false
-
-#}
-
-#resource "azurerm_storage_share" "azure_share1" {
-#  name                 = "azureshare1"
-#  storage_account_name = azurerm_storage_account.azure_storage1.name
-#  quota                = 5
-#  depends_on           = [azurerm_storage_account.azure_storage1]
-  
-#}
 
 provider "kubernetes" {
   config_path = "~/.kube/config"
