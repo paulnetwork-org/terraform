@@ -65,7 +65,7 @@ resource "azurerm_managed_disk" "azuredisk1" {
   }
 }
 
-
+# the bellow script runs after cluster is created and config imported --> az aks get-credentials --name paul --resource-group paul
 
 provider "kubernetes" {
   config_path = "~/.kube/config"
