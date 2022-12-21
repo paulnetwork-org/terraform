@@ -46,6 +46,6 @@ resource "azurerm_kubernetes_cluster" "paul" {
 }
 
 module "kubernetes_deployment" {
-  source = "./modules/website/"
+  source = "./modules/nginx/"
 }
 
