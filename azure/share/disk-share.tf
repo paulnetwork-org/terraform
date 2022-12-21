@@ -15,22 +15,22 @@ provider "azurerm" {
   features {}
 }
 
-resource "random_pet" "paul" {
-  prefix = var.resource_group_name_prefix
-}
+#resource "random_pet" "paul" {
+#  prefix = var.resource_group_name_prefix
+#}
 
 
 resource "azurerm_resource_group" "paul" {
-  name     = "paul-resources"
+  name     = "paul"
   location = var.location
 }
 
 
 resource "azurerm_kubernetes_cluster" "paul" {
-  name                = "paul-k8s"
+  name                = "paul"
   location            = azurerm_resource_group.paul.location
   resource_group_name = azurerm_resource_group.paul.name
-  dns_prefix          = "paulkube" 
+  dns_prefix          = "k8s" 
 
   default_node_pool {
     name           = "nodes"
@@ -52,20 +52,19 @@ resource "azurerm_kubernetes_cluster" "paul" {
 }
 
 
-
 resource "azurerm_managed_disk" "azuredisk1" {
   name                 = "azuredisk1"
   location             = azurerm_resource_group.paul.location
   resource_group_name  = azurerm_resource_group.paul.name
-  storage_account_type = "Standard_LRS"
+  storage_account_type = "Premium_LRS" # Currently shared disk only available with premium SSD 
   create_option        = "Empty"
   disk_size_gb         = "1"
+  max_shares           = "2"
   tags = {
     environment = azurerm_resource_group.paul.name
   }
 }
 
-# the bellow script runs after cluster is created and config imported --> az aks get-credentials --name paul --resource-group paul
 
 provider "kubernetes" {
   config_path = "~/.kube/config"
@@ -80,8 +79,9 @@ resource "kubernetes_persistent_volume" "azuredisk1" {
     capacity = {
       storage = "1Gi"
     }
-    access_modes = ["ReadWriteOnce"]
+    access_modes = ["ReadWriteMany"]
     storage_class_name = "azuredisk1"
+    volume_mode   = "Filesystem"
     persistent_volume_source {
       azure_disk {
         caching_mode  = "None"
@@ -100,7 +100,7 @@ resource "kubernetes_persistent_volume_claim" "azuredisk1" {
     name = "azuredisk1"
   }
   spec {
-    access_modes = ["ReadWriteOnce"]
+    access_modes = ["ReadWriteMany"]
     storage_class_name = "azuredisk1"
     resources {
       requests = {
@@ -116,7 +116,7 @@ resource "kubernetes_deployment" "website" {
     name = "website-deployment"
   }
   spec {
-    replicas = 1
+    replicas = 2
     selector {
       match_labels = {
         app = "website"
