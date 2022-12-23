@@ -60,6 +60,17 @@ resource "azurerm_managed_disk" "azuredisk1" {
   }
 }
 
+output "client_certificate" {
+  value     = azurerm_kubernetes_cluster.test2.kube_config.0.client_certificate
+  sensitive = true
+}
+
+output "kube_config" {
+  value = azurerm_kubernetes_cluster.test2.kube_config_raw
+
+  sensitive = true
+}
+
 
 provider "kubernetes" {
   host                   = azurerm_kubernetes_cluster.test2.kube_config.0.host
