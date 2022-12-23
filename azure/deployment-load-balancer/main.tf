@@ -11,10 +11,6 @@ provider "azurerm" {
   features {}
 }
 
-resource "random_pet" "paul" {
-  prefix = var.resource_group_name_prefix
-}
-
 resource "azurerm_resource_group" "paul" {
   name     = "paul"
   location = var.location
@@ -43,6 +39,26 @@ resource "azurerm_kubernetes_cluster" "paul" {
   identity {
     type = "SystemAssigned"
   }
+}
+
+
+output "client_certificate" {
+  value     = azurerm_kubernetes_cluster.test2.kube_config.0.client_certificate
+  sensitive = true
+}
+
+output "kube_config" {
+  value = azurerm_kubernetes_cluster.test2.kube_config_raw
+
+  sensitive = true
+}
+
+
+provider "kubernetes" {
+  host                   = azurerm_kubernetes_cluster.test2.kube_config.0.host
+  client_certificate     = base64decode(azurerm_kubernetes_cluster.test2.kube_config.0.client_certificate)
+  client_key             = base64decode(azurerm_kubernetes_cluster.test2.kube_config.0.client_key)
+  cluster_ca_certificate = base64decode(azurerm_kubernetes_cluster.test2.kube_config.0.cluster_ca_certificate)
 }
 
 module "kubernetes_deployment" {
