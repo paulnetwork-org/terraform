@@ -111,7 +111,7 @@ variable "vm-domain" {
 variable "vm_ipv4_addresses" {
   type  = list
   description = "Enter ipv4 addresses for the VM's"
-  default = ["192.168.200.71", "192.168.200.72", "192.168.200.73"]
+  default = ["192.168.200.71", "192.168.100.71", "192.168.150.71"]
 }
 
 variable "vm_ipv4_netmask" {
@@ -123,7 +123,7 @@ variable "vm_ipv4_netmask" {
 variable "vm_ipv4_gateways" {
   type = list
   description = "Enter the gateway's for every VM"
-  default = ["192.168.200.1", "192.168.200.1", "192.168.200.1"]
+  default = ["192.168.200.1", "192.168.100.1", "192.168.150.1"]
 }
 
 
