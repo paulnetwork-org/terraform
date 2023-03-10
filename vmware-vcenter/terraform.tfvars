@@ -9,7 +9,7 @@ vsphere-vcenter = "vcenter.paulnetwork.local"
 vsphere-user = "terraform@paulnetwork.local"
 
 # VMware vSphere password used to deploy the infrastructure
-vsphere-password = "143FF2Eof$34039Grlafds"
+vsphere-password = "1gfdFF2Eof$34039Grlafds"
 
 # Skip the verification of the vCenter SSL certificate (true/false)
 vsphere-unverified-ssl = "true"
@@ -24,7 +24,7 @@ vsphere-cluster = "PN-CLS"
 #esxi-name = "esxi.paulnetwork.local"
 
 # vSphere Datastore used to deploy VMs 
-vm-datastore = "DS1-SSD256"
+vm-datastore = "DS1-SSD1"
 
 # Linux virtual machine domain name
 vm-domain = "paulnetwork.local"
